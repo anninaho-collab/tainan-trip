@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#263c35">
+  <meta name="description" content="2026 年 10 月 9 日至 13 日，姐妹們的濟州島五天四夜旅行計畫。">
+  <title>韓國濟州島姐妹閨蜜之旅</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --forest: #263c35;
+      --forest-soft: #385446;
+      --ink: #293b32;
+      --muted: #718077;
+      --paper: #f1f3e8;
+      --card: #fffef9;
+      --sage: #e5ebd4;
+      --sage-deep: #cad7a3;
+      --coral: #e68168;
+      --line: #e3e7d9;
+      --shadow: 0 12px 30px rgba(38, 60, 53, .08);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 82px; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", "PingFang TC", sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    .app { width: min(100% - 28px, 640px); margin: 0 auto; padding: 22px 0 46px; }
+    .topbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 0 3px 17px; }
+    .brand { display: flex; align-items: center; gap: 9px; color: var(--forest); font-size: 13px; font-weight: 850; letter-spacing: .11em; }
+    .brand-mark { display: grid; place-items: center; width: 31px; height: 31px; border-radius: 11px; background: var(--forest); color: #f5f3df; font-size: 16px; }
+    .trip-date { padding: 6px 10px; border: 1px solid #dce2d1; border-radius: 999px; background: rgba(255,254,249,.7); color: #637267; font-size: 12px; font-weight: 750; white-space: nowrap; }
+    .hero { overflow: hidden; padding: 19px; border-radius: 28px; background: var(--forest); color: #f8f6e9; box-shadow: var(--shadow); }
+    .hero-copy { position: relative; z-index: 1; padding: 1px 2px 17px; }
+    .eyebrow { margin: 0 0 7px; color: #d9e3a9; font-size: 11px; font-weight: 850; letter-spacing: .17em; }
+    h1 { max-width: 440px; margin: 0; font-size: clamp(30px, 8vw, 42px); line-height: 1.18; letter-spacing: .025em; }
+    .hero-copy p:last-child { margin: 9px 0 0; color: #e0e6d2; font-size: 14px; }
+    .cover-photo {
+      position: relative;
+      display: flex;
+      min-height: 190px;
+      align-items: flex-end;
+      overflow: hidden;
+      padding: 15px;
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 20px;
+      background: linear-gradient(165deg, #83b9ad 0%, #b4d1bc 48%, #e7c99f 100%);
+      color: var(--forest);
+    }
+    .cover-photo::before { content: ""; position: absolute; width: 170px; height: 170px; right: -21px; top: -51px; border: 1px solid rgba(255,255,255,.35); border-radius: 50%; box-shadow: 0 0 0 22px rgba(255,255,255,.08), 0 0 0 45px rgba(255,255,255,.07); }
+    .cover-photo::after { content: ""; position: absolute; left: -10%; right: -10%; bottom: 33px; height: 68px; border-radius: 50% 50% 0 0 / 78% 78% 0 0; background: rgba(37,92,83,.25); transform: rotate(-3deg); }
+    .photo-placeholder { position: relative; z-index: 1; display: flex; width: 100%; align-items: flex-end; justify-content: space-between; gap: 12px; }
+    .photo-title { font-size: 26px; font-weight: 900; letter-spacing: .07em; text-shadow: 0 1px rgba(255,255,255,.32); }
+    .photo-caption { display: block; color: rgba(38,60,53,.78); font-size: 11px; font-weight: 800; letter-spacing: .08em; }
+    .photo-badge { padding: 6px 9px; border: 1px solid rgba(38,60,53,.22); border-radius: 999px; background: rgba(255,254,249,.63); color: #385446; font-size: 10px; font-weight: 800; white-space: nowrap; }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; margin: 13px 0 18px; }
+    .stat { padding: 11px 9px; border: 1px solid var(--line); border-radius: 16px; background: rgba(255,254,249,.76); text-align: center; }
+    .stat strong { display: block; color: var(--forest); font-size: 18px; line-height: 1.25; }
+    .stat span { display: block; margin-top: 3px; color: var(--muted); font-size: 11px; font-weight: 700; }
+    .quick-nav { position: sticky; z-index: 5; top: 8px; display: flex; gap: 7px; overflow-x: auto; margin: 0 -2px 21px; padding: 4px 2px 9px; scrollbar-width: none; }
+    .quick-nav::-webkit-scrollbar { display: none; }
+    .quick-nav a { flex: 0 0 auto; padding: 8px 12px; border: 1px solid #dfe5d4; border-radius: 999px; background: rgba(255,254,249,.94); color: #596b5e; font-size: 12px; font-weight: 800; text-decoration: none; box-shadow: 0 3px 8px rgba(38,60,53,.04); }
+    .quick-nav a:first-child { border-color: var(--forest); background: var(--forest); color: #f7f4df; }
+    .section { margin-top: 25px; scroll-margin-top: 74px; }
+    .section-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 10px; margin: 0 3px 12px; }
+    .section-heading h2 { margin: 0; color: var(--forest); font-size: 21px; line-height: 1.25; }
+    .section-heading p { margin: 4px 0 0; color: var(--muted); font-size: 12px; }
+    .section-kicker { color: #82906a; font-size: 10px; font-weight: 850; letter-spacing: .13em; white-space: nowrap; }
+    .panel { padding: 16px; border: 1px solid var(--line); border-radius: 20px; background: var(--card); box-shadow: 0 5px 16px rgba(38,60,53,.045); }
+    .flight-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+    .flight-top h3 { margin: 0; color: var(--forest); font-size: 17px; }
+    .fare { color: var(--coral); font-size: 18px; font-weight: 900; white-space: nowrap; }
+    .fine { margin: 3px 0 0; color: var(--muted); font-size: 12px; }
+    .flight-legs { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-top: 14px; }
+    .leg { padding: 11px; border-radius: 14px; background: #f1f4e8; }
+    .leg-label { display: block; color: #748267; font-size: 10px; font-weight: 850; letter-spacing: .08em; }
+    .leg strong { display: block; margin-top: 3px; color: var(--forest); font-size: 13px; }
+    .leg-route { display: block; margin-top: 4px; color: #596a60; font-size: 12px; line-height: 1.4; }
+    .baggage { margin: 10px 0 0; padding: 9px 11px; border-radius: 12px; background: #f8eee6; color: #775b4d; font-size: 12px; font-weight: 700; }
+    .stay-stack, .party-stack { display: grid; gap: 10px; }
+    .stay { padding: 13px; border-radius: 16px; background: #f2f4ea; }
+    .stay-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+    .stay h3 { margin: 0; color: var(--forest); font-size: 15px; }
+    .stay-ko { display: block; color: var(--muted); font-size: 11px; font-weight: 650; }
+    .stay-tag { padding: 4px 7px; border-radius: 999px; background: #dfe8cc; color: #596e50; font-size: 10px; font-weight: 800; white-space: nowrap; }
+    .stay p { margin: 6px 0 0; color: #66746b; font-size: 12px; overflow-wrap: anywhere; }
+    .party-stack { grid-template-columns: 1fr 1fr; }
+    .party { padding: 14px; border-radius: 16px; background: #f2f4ea; }
+    .party-date { color: #83906e; font-size: 10px; font-weight: 850; letter-spacing: .08em; }
+    .party h3 { margin: 4px 0 2px; color: var(--forest); font-size: 15px; }
+    .party p { margin: 4px 0 0; color: #68766d; font-size: 12px; }
+    .days-nav { display: flex; gap: 7px; overflow-x: auto; margin: 0 0 11px; padding: 0 0 4px; scrollbar-width: none; }
+    .days-nav::-webkit-scrollbar { display: none; }
+    .days-nav a { flex: 0 0 auto; min-width: 54px; padding: 7px 9px; border: 1px solid #dce3d0; border-radius: 13px; background: #fbfcf5; color: #60705e; font-size: 11px; font-weight: 800; text-align: center; text-decoration: none; }
+    .days-nav a:first-child { border-color: var(--forest); background: var(--forest); color: #f7f4df; }
+    .day-card { margin-top: 12px; padding: 15px; border: 1px solid var(--line); border-radius: 21px; background: var(--card); box-shadow: 0 5px 17px rgba(38,60,53,.045); scroll-margin-top: 76px; }
+    .day-header { display: flex; align-items: center; gap: 11px; padding-bottom: 12px; border-bottom: 1px solid #edf0e7; }
+    .day-stamp { display: grid; place-items: center; min-width: 52px; height: 45px; padding: 0 7px; border-radius: 14px; background: var(--forest); color: #f4f2dd; font-size: 12px; font-weight: 900; }
+    .day-header h3 { margin: 0; color: var(--forest); font-size: 16px; line-height: 1.3; }
+    .day-header p { margin: 3px 0 0; color: var(--muted); font-size: 11px; }
+    .timeline { position: relative; display: grid; gap: 0; padding-top: 3px; }
+    .timeline::before { content: ""; position: absolute; top: 18px; bottom: 20px; left: 51px; width: 1px; background: #dbe3ce; }
+    .stop { position: relative; display: grid; grid-template-columns: 42px 1fr; gap: 18px; padding: 11px 0; }
+    .time { position: relative; z-index: 1; padding-top: 1px; color: #77866d; font-size: 11px; font-weight: 850; font-variant-numeric: tabular-nums; }
+    .stop-body { min-width: 0; }
+    .stop h4 { margin: 0; color: #2e4237; font-size: 14px; line-height: 1.4; }
+    .place { display: block; margin-top: 2px; color: #64765d; font-size: 11px; font-weight: 750; }
+    .stop p { margin: 5px 0 0; color: var(--muted); font-size: 12px; line-height: 1.55; }
+    .sample { display: inline-block; margin-left: 4px; padding: 1px 6px; border-radius: 999px; background: #f8e6dd; color: #a65f4c; font-size: 9px; font-weight: 800; vertical-align: 1px; }
+    .reminders { display: grid; gap: 8px; }
+    .reminder { display: grid; grid-template-columns: 31px 1fr; gap: 9px; align-items: start; padding: 11px; border-radius: 14px; background: #f2f4ea; }
+    .reminder-icon { display: grid; place-items: center; width: 29px; height: 29px; border-radius: 10px; background: #dfe8cc; font-size: 14px; }
+    .reminder strong { display: block; color: var(--forest); font-size: 12px; }
+    .reminder span:last-child { display: block; margin-top: 2px; color: var(--muted); font-size: 12px; }
+    .notice { margin: 13px 0 0; padding: 12px 14px; border-radius: 16px; background: var(--forest); color: #e4e9d4; font-size: 12px; }
+    .notice strong { color: #f3dda7; }
+    .credit { margin: 18px 6px 0; color: #879187; font-size: 10px; text-align: center; }
+    @media (min-width: 560px) {
+      .app { padding-top: 32px; }
+      .hero { padding: 23px; }
+      .cover-photo { min-height: 235px; }
+      .panel { padding: 19px; }
+      .day-card { padding: 18px 20px; }
+      .stop { grid-template-columns: 48px 1fr; gap: 19px; }
+      .timeline::before { left: 57px; }
+    }
+    @media (max-width: 380px) {
+      .app { width: min(100% - 20px, 640px); }
+      .hero { padding: 15px; border-radius: 24px; }
+      .flight-legs { grid-template-columns: 1fr; }
+      .party-stack { grid-template-columns: 1fr; }
+      .photo-title { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <div class="topbar">
+      <div class="brand"><span class="brand-mark">✦</span><span>OUR JEJU JOURNAL</span></div>
+      <span class="trip-date">2026.10.09 — 10.13</span>
+    </div>
+
+    <header class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">GIRLS' GETAWAY · 우리들의 제주</p>
+        <h1>韓國濟州島<br>姐妹閨蜜之旅</h1>
+        <p>五天四夜的海風、橘子和我們的快樂假期 ♡</p>
+      </div>
+      <div class="cover-photo" role="img" aria-label="濟州島主視覺照片預留位置，等待加入照片">
+        <div class="photo-placeholder">
+          <div><span class="photo-title">JEJU, WITH LOVE</span><span class="photo-caption">WAVES · TANGERINES · US</span></div>
+          <span class="photo-badge">濟州照片待加入</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="stats" aria-label="旅程摘要">
+      <div class="stat"><strong>5 日</strong><span>一起出走</span></div>
+      <div class="stat"><strong>2＋3</strong><span>姐妹與旅伴</span></div>
+      <div class="stat"><strong>10.09</strong><span>出發日</span></div>
+    </div>
+
+    <nav class="quick-nav" aria-label="快速前往">
+      <a href="#overview">旅程資訊</a><a href="#itinerary">五日行程</a><a href="#reminders">行前提醒</a>
+    </nav>
+
+    <section class="section" id="overview">
+      <div class="section-heading"><div><h2>旅程小檔案</h2><p>機票、住宿和旅伴，一頁收好</p></div><span class="section-kicker">TRIP DETAILS</span></div>
+      <article class="panel">
+        <div class="flight-top"><div><h3>✈️ 台灣虎航・濟州來回</h3><p class="fine">10/09 出發｜含稅現金價</p></div><span class="fare">NT$7,999</span></div>
+        <div class="flight-legs">
+          <div class="leg"><span class="leg-label">GO · IT654</span><strong>桃園 → 濟州</strong><span class="leg-route">06:40 起飛<br>09:35 抵達</span></div>
+          <div class="leg"><span class="leg-label">BACK · IT655</span><strong>濟州 → 桃園</strong><span class="leg-route">10:30 起飛<br>11:35 抵達</span></div>
+        </div>
+        <p class="baggage">🎒 行李：托運 20 公斤＋手提 10 公斤</p>
+      </article>
+
+      <div class="section-heading" style="margin-top:16px"><div><h2>入住口袋名單</h2><p>兩段住宿，換宿日記得帶好行李</p></div><span class="section-kicker">STAY</span></div>
+      <div class="stay-stack">
+        <article class="stay">
+          <div class="stay-head"><div><h3>愜客飯店 <span class="stay-ko">제주 체크인 호텔</span></h3></div><span class="stay-tag">住 2 晚</span></div>
+          <p>1429 Geonip-dong, 63277 濟州市, 濟州特別自治道, 韓國</p>
+          <p><strong>入住</strong>　2026/10/9（五）15:00–22:00</p>
+          <p><strong>退房</strong>　2026/10/11（日）11:00 前</p>
+        </article>
+        <article class="stay">
+          <div class="stay-head"><div><h3>錦繡大飯店 <span class="stay-ko">제이-그랜드호텔 / J-Grand Hotel</span></h3></div><span class="stay-tag">住 2 晚</span></div>
+          <p>韓國濟州特別自治道濟州市 Sammu-ro 57 號 1 樓</p>
+          <p>距離濟州國際機場約 1.9 公里</p>
+          <p><strong>入住</strong>　2026/10/11（日）15:00 後</p>
+          <p><strong>退房</strong>　2026/10/13（二）11:00 前</p>
+          <p><strong>房型</strong>　豪華大床房 1 間</p>
+        </article>
+      </div>
+
+      <div class="section-heading" style="margin-top:16px"><div><h2>誰跟我們一起？</h2><p>前兩天雙人慢遊，後兩天五人自駕</p></div><span class="section-kicker">OUR CREW</span></div>
+      <div class="party-stack">
+        <article class="party"><span class="party-date">10/09 — 10/10</span><h3>👭 兩人自由行</h3><p>你和雲姐同行，共 2 人；不租車，以步行、大眾交通或計程車移動。</p></article>
+        <article class="party"><span class="party-date">10/11 — 10/12</span><h3>🚙 五人自駕日</h3><p>你們兩人＋其他 3 位旅伴，共 5 人；租車期間 10/11–10/12。</p></article>
+      </div>
+    </section>
+
+    <section class="section" id="itinerary">
+      <div class="section-heading"><div><h2>我們的濟州日記</h2><p>每天一點點冒險，慢慢收集海島回憶</p></div><span class="section-kicker">DAY BY DAY</span></div>
+      <nav class="days-nav" aria-label="選擇日期">
+        <a href="#day-1">10/09<br>DAY 1</a><a href="#day-2">10/10<br>DAY 2</a><a href="#day-3">10/11<br>DAY 3</a><a href="#day-4">10/12<br>DAY 4</a><a href="#day-5">10/13<br>DAY 5</a>
+      </nav>
+
+      <article class="day-card" id="day-1">
+        <header class="day-header"><span class="day-stamp">10/09<br>FRI</span><div><h3>第一天・抵達濟州</h3><p>兩人出發，海邊暖身</p></div></header>
+        <div class="timeline">
+          <div class="stop"><time class="time">09:35</time><div class="stop-body"><h4>抵達濟州機場・IT654</h4><span class="place">濟州市・兩人同行，無租車</span><p>通關領行李後，搭乘大眾交通或計程車展開旅程。</p></div></div>
+          <div class="stop"><time class="time">12:00</time><div class="stop-body"><h4>海女鮑魚鍋 <span class="sample">示意店名</span></h4><span class="place">濟州市・午餐</span><p>先吃一頓熱騰騰的海鮮料理，補充旅途元氣。</p></div></div>
+          <div class="stop"><time class="time">14:30</time><div class="stop-body"><h4>梨湖紅白馬燈塔 <span class="sample">示意時間</span></h4><span class="place">濟州市・海岸散步</span><p>在可愛的馬燈塔旁吹海風，拍下旅程第一張合照。</p></div></div>
+          <div class="stop"><time class="time">15:00</time><div class="stop-body"><h4>愜客飯店・辦理入住</h4><span class="place">제주 체크인 호텔・連住 2 晚</span><p>入住後稍作休息，再到附近享用晚餐。</p></div></div>
+        </div>
+      </article>
+
+      <article class="day-card" id="day-2">
+        <header class="day-header"><span class="day-stamp">10/10<br>SAT</span><div><h3>第二天・東邊海岸</h3><p>姐妹散步・城山日出峰</p></div></header>
+        <div class="timeline">
+          <div class="stop"><time class="time">08:30</time><div class="stop-body"><h4>鮑魚粥早餐 <span class="sample">示意店名</span></h4><span class="place">濟州市・早餐</span><p>用暖胃的濟州鮑魚粥開啟充實的一天。</p></div></div>
+          <div class="stop"><time class="time">10:30</time><div class="stop-body"><h4>城山日出峰 <span class="sample">示意時間</span></h4><span class="place">西歸浦市・世界自然遺產</span><p>兩人同行，先確認公車班次與轉乘時間，再沿步道欣賞火山地形和海景。</p></div></div>
+          <div class="stop"><time class="time">13:00</time><div class="stop-body"><h4>涉地可支海岸 <span class="sample">示意時間</span></h4><span class="place">西歸浦市・海岸步道</span><p>沿著火山岩海岸散步，收集遼闊海景和旅行照片。</p></div></div>
+          <div class="stop"><time class="time">17:00</time><div class="stop-body"><h4>月汀里海景咖啡 <span class="sample">示意店名</span></h4><span class="place">舊左邑・咖啡與海景</span><p>搭車到海邊咖啡店坐坐，享受姐妹聊天時光。</p></div></div>
+        </div>
+      </article>
+
+      <article class="day-card" id="day-3">
+        <header class="day-header"><span class="day-stamp">10/11<br>SUN</span><div><h3>第三天・旅伴會合</h3><p>取車自駕・退房換宿</p></div></header>
+        <div class="timeline">
+          <div class="stop"><time class="time">09:00</time><div class="stop-body"><h4>退房・東門市場早餐 <span class="sample">示意店名</span></h4><span class="place">愜客飯店退房至 11:00 前</span><p>你和雲姐帶好行李，在濟州會合其他 3 位旅伴。</p></div></div>
+          <div class="stop"><time class="time">10:30</time><div class="stop-body"><h4>取車・五人自駕出發 <span class="sample">示意時間</span></h4><span class="place">租車期間 10/11–10/12</span><p>五位旅伴一起取車，開始兩天的自駕行程。</p></div></div>
+          <div class="stop"><time class="time">11:00</time><div class="stop-body"><h4>思連이숲길森林步道 <span class="sample">示意時間</span></h4><span class="place">濟州市・森林散步</span><p>走入杉木林步道，在清新的森林空氣裡慢慢充電。</p></div></div>
+          <div class="stop"><time class="time">14:00</time><div class="stop-body"><h4>天地淵瀑布 <span class="sample">示意時間</span></h4><span class="place">西歸浦市・自然景點</span><p>沿著林蔭步道看瀑布，安排一段輕鬆的午後散策。</p></div></div>
+          <div class="stop"><time class="time">15:00</time><div class="stop-body"><h4>錦繡大飯店・辦理入住</h4><span class="place">J-Grand Hotel・豪華大床房</span><p>回濟州市放好行李，稍作休息後再安排晚餐。</p></div></div>
+          <div class="stop"><time class="time">18:00</time><div class="stop-body"><h4>黑豬肉烤肉店 <span class="sample">示意店名</span></h4><span class="place">濟州市・晚餐</span><p>點一桌濟州黑豬肉和小菜，今晚就好好吃一頓。</p></div></div>
+        </div>
+      </article>
+
+      <article class="day-card" id="day-4">
+        <header class="day-header"><span class="day-stamp">10/12<br>MON</span><div><h3>第四天・五人自駕</h3><p>涯月海岸・咖啡與夕陽</p></div></header>
+        <div class="timeline">
+          <div class="stop"><time class="time">09:00</time><div class="stop-body"><h4>飯店早餐・悠閒出發 <span class="sample">示意店名</span></h4><span class="place">錦繡大飯店・續住</span><p>五位旅伴一起出發，行李可先留在飯店。</p></div></div>
+          <div class="stop"><time class="time">11:30</time><div class="stop-body"><h4>柱狀節理帶 <span class="sample">示意時間</span></h4><span class="place">西歸浦市・海岸地景</span><p>欣賞海浪與整齊玄武岩柱相遇的壯觀景色。</p></div></div>
+          <div class="stop"><time class="time">14:30</time><div class="stop-body"><h4>涯月海岸咖啡街 <span class="sample">示意店名</span></h4><span class="place">涯月邑・咖啡散策</span><p>沿海岸公路挑一家喜歡的咖啡店，邊看海邊聊天。</p></div></div>
+          <div class="stop"><time class="time">17:30</time><div class="stop-body"><h4>挾才海水浴場夕陽 <span class="sample">示意時間</span></h4><span class="place">翰林邑・海邊日落</span><p>五人一起找個舒服的位置看夕陽，把美景存進相簿。</p></div></div>
+        </div>
+      </article>
+
+      <article class="day-card" id="day-5">
+        <header class="day-header"><span class="day-stamp">10/13<br>TUE</span><div><h3>第五天・帶著回憶返家</h3><p>早上還車・雅婷載往機場</p></div></header>
+        <div class="timeline">
+          <div class="stop"><time class="time">07:00</time><div class="stop-body"><h4>早上還車・雅婷載往機場 <span class="sample">示意時間</span></h4><span class="place">濟州市・你和雲姐同行</span><p>早上辦理還車後，由雅婷載你和雲姐前往濟州機場，預留報到與托運時間。</p></div></div>
+          <div class="stop"><time class="time">10:30</time><div class="stop-body"><h4>濟州起飛・IT655</h4><span class="place">濟州 ➜ 桃園</span><p>搭乘回程班機，預計 11:35 抵達桃園。</p></div></div>
+        </div>
+      </article>
+    </section>
+
+    <section class="section" id="reminders">
+      <div class="section-heading"><div><h2>行前提醒</h2><p>把小事準備好，出發就能放心玩</p></div><span class="section-kicker">DON'T FORGET</span></div>
+      <div class="panel reminders">
+        <div class="reminder"><span class="reminder-icon">🌤️</span><div><strong>天氣</strong><span>示意｜出發前查看濟州島天氣，準備洋蔥式穿搭。</span></div></div>
+        <div class="reminder"><span class="reminder-icon">🎒</span><div><strong>要帶的東西</strong><span>示意｜護照、充電器、轉接頭、薄外套與常備藥。</span></div></div>
+        <div class="reminder"><span class="reminder-icon">⏰</span><div><strong>集合時間</strong><span>示意｜10/9 凌晨 03:30，桃園機場第一航廈集合。</span></div></div>
+      </div>
+      <p class="notice"><strong>閨蜜旅行備忘</strong>　10/9–10/10 兩人無車；10/11–10/12 加入 3 位旅伴並租車。票價與住宿依提供資訊整理，景點店名與部分時間仍為示意；回程前確認還車與報到時間。</p>
+    </section>
+
+    <p class="credit">視覺排版靈感：Tourminder 🏝️ | Travel Planner App by Deekshitha Perapogu · CC BY 4.0</p>
+  </main>
+</body>
+</html>
