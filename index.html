@@ -73,6 +73,16 @@
     .section-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 10px; margin: 0 3px 12px; }
     .section-heading h2 { margin: 0; color: var(--forest); font-size: 21px; line-height: 1.25; }
     .section-heading p { margin: 4px 0 0; color: var(--muted); font-size: 12px; }
+    .fold-summary { display: flex; align-items: flex-end; justify-content: space-between; gap: 10px; padding: 0 3px 12px; cursor: pointer; list-style: none; }
+    .fold-summary::-webkit-details-marker { display: none; }
+    .fold-summary::marker { content: ""; }
+    .fold-summary:focus-visible { outline: 3px solid var(--coral); outline-offset: 4px; border-radius: 8px; }
+    .fold-title { min-width: 0; }
+    .fold-main { display: block; color: var(--forest); font-size: 21px; font-weight: 800; line-height: 1.25; }
+    .fold-desc { display: block; margin-top: 4px; color: var(--muted); font-size: 12px; }
+    .fold-summary::after { content: "⌄"; display: grid; place-items: center; width: 32px; height: 32px; flex: 0 0 32px; border-radius: 50%; background: var(--forest); color: #f7f4df; font-size: 18px; font-weight: 800; transition: transform .2s ease; }
+    .fold-details:not([open]) .fold-summary::after { transform: rotate(-90deg); }
+    .fold-content { display: grid; gap: 0; }
     .section-kicker { color: #82906a; font-size: 10px; font-weight: 850; letter-spacing: .13em; white-space: nowrap; }
     .panel { padding: 16px; border: 1px solid var(--line); border-radius: 20px; background: var(--card); box-shadow: 0 5px 16px rgba(38,60,53,.045); }
     .flight-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
@@ -173,7 +183,9 @@
     </nav>
 
     <section class="section" id="overview">
-      <div class="section-heading"><div><h2>旅程小檔案</h2><p>機票、住宿和旅伴，一頁收好</p></div><span class="section-kicker">TRIP DETAILS</span></div>
+      <details class="fold-details" open>
+        <summary class="fold-summary"><span class="fold-title"><span class="fold-main">旅程小檔案</span><span class="fold-desc">機票、住宿和旅伴，一頁收好</span></span><span class="section-kicker">TRIP DETAILS</span></summary>
+        <div class="fold-content">
       <article class="panel">
         <div class="flight-top"><div><h3>✈️ 台灣虎航・濟州來回</h3><p class="fine">10/09 出發｜含稅現金價</p></div><span class="fare">NT$7,999</span></div>
         <div class="flight-legs">
@@ -206,6 +218,8 @@
         <article class="party"><span class="party-date">10/09 — 10/10</span><h3>👭 兩人自由行</h3><p>你和雲姐同行，共 2 人；不租車，以步行、大眾交通或計程車移動。</p></article>
         <article class="party"><span class="party-date">10/11 — 10/12</span><h3>🚙 五人自駕日</h3><p>你們兩人＋其他 3 位旅伴，共 5 人；租車期間 10/11–10/12。</p></article>
       </div>
+        </div>
+      </details>
     </section>
 
     <section class="section" id="itinerary">
