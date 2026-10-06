@@ -108,6 +108,12 @@
     .days-nav::-webkit-scrollbar { display: none; }
     .days-nav a { flex: 0 0 auto; min-width: 54px; padding: 7px 9px; border: 1px solid #dce3d0; border-radius: 13px; background: #fbfcf5; color: #60705e; font-size: 11px; font-weight: 800; text-align: center; text-decoration: none; }
     .days-nav a:first-child { border-color: var(--forest); background: var(--forest); color: #f7f4df; }
+    .itinerary-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 0 12px; }
+    .itinerary-tools button { padding: 8px 14px; border: 1px solid #dce3d0; border-radius: 999px; background: var(--card); color: var(--forest); font: inherit; font-size: 14px; font-weight: 800; cursor: pointer; }
+    .itinerary-tools button[aria-pressed="true"] { border-color: var(--forest); background: var(--forest); color: #f7f4df; }
+    .itinerary-tools button:focus-visible { outline: 3px solid var(--coral); outline-offset: 2px; }
+    .today-status { flex-basis: 100%; margin: 0; color: var(--muted); font-size: 14px; }
+    .day-card.is-filtered-out, .days-nav.is-filtered-out { display: none; }
     .day-card { margin-top: 16px; padding: 15px; border: 1px solid var(--line); border-radius: 21px; background: var(--card); box-shadow: 0 5px 17px rgba(38,60,53,.045); scroll-margin-top: 76px; }
     .day-header { display: flex; align-items: center; gap: 11px; padding-bottom: 14px; border-bottom: 2px solid #e3e7d9; }
     .day-stamp { display: grid; place-items: center; min-width: 52px; height: 45px; padding: 0 7px; border-radius: 14px; background: var(--forest); color: #f4f2dd; font-size: 12px; font-weight: 900; }
@@ -123,6 +129,11 @@
     }
     .time { position: relative; z-index: 1; padding-top: 1px; color: #77866d; font-size: 11px; font-weight: 850; font-variant-numeric: tabular-nums; }
     .stop-body { min-width: 0; }
+    .stop-title-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+    .stop-title-row h4 { flex: 1; min-width: 0; }
+    .station-check { display: inline-flex; flex: 0 0 auto; align-items: center; justify-content: center; width: 28px; height: 28px; margin: -4px -4px 0 0; cursor: pointer; }
+    .station-check input { width: 22px; height: 22px; margin: 0; accent-color: var(--forest); cursor: pointer; }
+    .stop.is-checked { background: #f0f4e9; }
     .stop h4 { margin: 0; color: #2e4237; font-size: 14px; line-height: 1.4; }
     .place { display: block; margin-top: 2px; color: #64765d; font-size: 11px; font-weight: 750; }
     .stop p { margin: 5px 0 0; color: var(--muted); font-size: 12px; line-height: 1.55; }
@@ -232,6 +243,11 @@
       <nav class="days-nav" aria-label="選擇日期">
         <a href="#day-1">10/09<br>DAY 1</a><a href="#day-2">10/10<br>DAY 2</a><a href="#day-3">10/11<br>DAY 3</a><a href="#day-4">10/12<br>DAY 4</a><a href="#day-5">10/13<br>DAY 5</a>
       </nav>
+      <div class="itinerary-tools" role="group" aria-label="行程顯示方式">
+        <button type="button" data-view="all" aria-pressed="true">看全部</button>
+        <button type="button" data-view="today" aria-pressed="false">只看今天</button>
+        <p class="today-status" aria-live="polite"></p>
+      </div>
 
       <article class="day-card" id="day-1">
         <header class="day-header"><span class="day-stamp">10/09<br>FRI</span><div><h3>第一天・抵達濟州</h3><p>兩人出發，海邊暖身</p></div></header>
@@ -331,6 +347,74 @@
   }
 
   document.querySelectorAll('.timeline .stop').forEach(station => observer.observe(station));
+})();
+</script>
+<script>
+(() => {
+  const dayCards = [...document.querySelectorAll('.day-card')];
+  const dayNav = document.querySelector('.days-nav');
+  const viewButtons = [...document.querySelectorAll('.itinerary-tools [data-view]')];
+  const status = document.querySelector('.today-status');
+  const dayDates = {
+    'day-1': '2026-10-09',
+    'day-2': '2026-10-10',
+    'day-3': '2026-10-11',
+    'day-4': '2026-10-12',
+    'day-5': '2026-10-13'
+  };
+  const storageKey = 'jeju-itinerary-checks-v1';
+  let checkedStops = {};
+  try { checkedStops = JSON.parse(localStorage.getItem(storageKey) || '{}') || {}; } catch (_) {}
+
+  dayCards.forEach(day => {
+    day.querySelectorAll('.stop').forEach((station, index) => {
+      const title = station.querySelector('h4');
+      const body = station.querySelector('.stop-body');
+      if (!title || !body) return;
+
+      const stopKey = `${day.id}:${index + 1}`;
+      const titleRow = document.createElement('div');
+      titleRow.className = 'stop-title-row';
+      title.parentNode.insertBefore(titleRow, title);
+      titleRow.appendChild(title);
+
+      const label = document.createElement('label');
+      label.className = 'station-check';
+      const checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      checkbox.checked = checkedStops[stopKey] === true;
+      checkbox.setAttribute('aria-label', `完成：${title.textContent.trim()}`);
+      label.appendChild(checkbox);
+      titleRow.appendChild(label);
+      station.classList.toggle('is-checked', checkbox.checked);
+
+      checkbox.addEventListener('change', () => {
+        if (checkbox.checked) checkedStops[stopKey] = true;
+        else delete checkedStops[stopKey];
+        station.classList.toggle('is-checked', checkbox.checked);
+        try { localStorage.setItem(storageKey, JSON.stringify(checkedStops)); } catch (_) {}
+      });
+    });
+  });
+
+  function getJejuDate() {
+    const parts = new Intl.DateTimeFormat('en', {
+      timeZone: 'Asia/Seoul', year: 'numeric', month: '2-digit', day: '2-digit'
+    }).formatToParts(new Date());
+    const date = Object.fromEntries(parts.map(part => [part.type, part.value]));
+    return `${date.year}-${date.month}-${date.day}`;
+  }
+
+  function setView(view) {
+    const today = getJejuDate();
+    const todayCard = dayCards.find(day => dayDates[day.id] === today);
+    dayCards.forEach(day => day.classList.toggle('is-filtered-out', view === 'today' && day !== todayCard));
+    dayNav.classList.toggle('is-filtered-out', view === 'today');
+    viewButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.view === view)));
+    status.textContent = view === 'today' && !todayCard ? '濟州當地今天沒有安排的行程；可以切回「看全部」。' : '';
+  }
+
+  viewButtons.forEach(button => button.addEventListener('click', () => setView(button.dataset.view)));
 })();
 </script>
 </body>
